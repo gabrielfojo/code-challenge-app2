@@ -177,8 +177,11 @@ export default {
     },
     finish(msg = "Great!! you made it in " + this.score + " secs") {
       // Check record
-      if (this.record === null || this.record > this.score) {
+      const isNull = (value) => typeof value === "object" && !value;
+
+      if (isNull(this.record) || this.record > this.score) {
         localStorage.setItem("record", this.score);
+        this.record = this.score;
         msg = `Super!! this is a new Record!!`;
       }
 
